@@ -1,0 +1,81 @@
+# ----------------------
+# Python cache & builds
+# ----------------------
+__pycache__/
+*.py[cod]
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ----------------------
+# Virtual environments
+# ----------------------
+.venv/
+venv/
+env/
+
+# ----------------------
+# Environment variables (VERY IMPORTANT)
+# ----------------------
+.env
+.env.*
+*.env
+
+# ----------------------
+# Database files
+# ----------------------
+*.db
+*.sqlite3
+*.sqlite
+
+# ----------------------
+# Logs
+# ----------------------
+*.log
+logs/
+
+# ----------------------
+# Editor / IDE
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ----------------------
+# OS files
+# ----------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# Testing & coverage
+# ----------------------
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ----------------------
+# Type checking / linting
+# ----------------------
+.mypy_cache/
+.ruff_cache/
+
+# ----------------------
+# Jupyter (if ever used)
+# ----------------------
+.ipynb_checkpoints/
+
+# ----------------------
+# Docker (optional)
+# ----------------------
+*.pid
+*.seed
+
+# ----------------------
+# uv / packaging
+# ----------------------
+uv.lock  # optional: commit if you want reproducible builds
