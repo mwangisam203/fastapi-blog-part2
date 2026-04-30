@@ -182,6 +182,10 @@ def get_post(post_id: int, db: Annotated[Session, Depends(get_db)]):
         return post
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
 
+@app.patch("/posts/{post_id}")
+def post_update(post_id: int, db: Annotated[Session, Depends(get_db)]):
+
+
 ## StarletteHTTPException Handler
 @app.exception_handler(StarletteHTTPException)
 def general_http_exception_handler(request: Request, exception: StarletteHTTPException):
