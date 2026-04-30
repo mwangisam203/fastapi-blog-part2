@@ -184,6 +184,7 @@ def get_post(post_id: int, db: Annotated[Session, Depends(get_db)]):
 
 @app.patch("/posts/{post_id}")
 def post_update(post_id: int, db: Annotated[Session, Depends(get_db)]):
+    results = db
 
 
 ## StarletteHTTPException Handler
