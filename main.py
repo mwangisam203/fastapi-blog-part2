@@ -2,17 +2,29 @@ from fastapi import FastAPI, Request, HTTPException, status, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from schemas import PostCreate, PostResponse, UserCreate, UserResponse, PostUpdate, UserUpdate
 from typing import Annotated
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 import models
 from database import Base, engine, get_db
+from contextlib import asynccontextmanager
+from fastapi.exception_handlers import (
+    http_exception_handler,
+    request_validation_exception_handler,
+)
 
 
-Base.metadata.create_all(bind=engine)
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    #startup
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+    await engine.dispose
 
 
 app = FastAPI()
