@@ -19,11 +19,11 @@ from routers import users, posts
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    #startup
+    # startup
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     yield
-    #shutdown
+    # shutdown
     await engine.dispose
 
 
@@ -39,13 +39,14 @@ app.include_router(users.router, prefix="/api/users", tags=["users"])
 app.include_router(posts.router, prefix="/api/posts", tags=["posts"])
 
 
-
 @app.get("/", include_in_schema=False, name="home")
 @app.get("/posts", include_in_schema=False, name="posts")
 async def home(request: Request, db: Annotated[AsyncSession, Depends(get_db)]):
     result = await db.execute(
-        select(models.Post).options(selectinload(models.Post.author)),
-        )
+        select(models.Post)
+        .options(selectinload(models.Post.author))
+        .order_by(models.Post.date_posted.desc()),
+    )
     posts = result.scalars().all()
     return templates.TemplateResponse(
         request,
@@ -54,9 +55,10 @@ async def home(request: Request, db: Annotated[AsyncSession, Depends(get_db)]):
     )
 
 
-
 @app.get("/posts/{post_id}", include_in_schema=False)
-async def post_page(request: Request, post_id: int, db: Annotated[AsyncSession, Depends(get_db)]):
+async def post_page(
+    request: Request, post_id: int, db: Annotated[AsyncSession, Depends(get_db)]
+):
     result = await db.execute(
         select(models.Post)
         .options(selectinload(models.Post.author))
@@ -71,7 +73,6 @@ async def post_page(request: Request, post_id: int, db: Annotated[AsyncSession, 
             {"post": post, "title": title},
         )
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
-
 
 
 @app.get("/users/{user_id}/posts", include_in_schema=False, name="user_posts")
@@ -90,7 +91,8 @@ async def user_posts_page(
     result = await db.execute(
         select(models.Post)
         .options(selectinload(models.Post.author))
-        .where(models.Post.user_id == user_id),
+        .where(models.Post.user_id == user_id)
+        .order_by(models.Post.date_posted.desc()),
     )
     posts = result.scalars().all()
     return templates.TemplateResponse(
@@ -102,18 +104,18 @@ async def user_posts_page(
 
 ## StarletteHTTPException Handler
 @app.exception_handler(StarletteHTTPException)
-async def general_http_exception_handler(request: Request, exception: StarletteHTTPException):
-    
+async def general_http_exception_handler(
+    request: Request, exception: StarletteHTTPException
+):
+
     if request.url.path.startswith("/api"):
         return await http_exception_handler(request, exception)
-    
 
     message = (
         exception.detail
         if exception.detail
         else "An error occurred. Please check your request and try again."
     )
-
 
     return templates.TemplateResponse(
         request,
@@ -129,10 +131,12 @@ async def general_http_exception_handler(request: Request, exception: StarletteH
 
 ## RequestValidationError Handler ***
 @app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exception: RequestValidationError):
+async def validation_exception_handler(
+    request: Request, exception: RequestValidationError
+):
     if request.url.path.startswith("/api"):
         return await request_validation_exception_handler(request, exception)
-    
+
     return templates.TemplateResponse(
         request,
         "error.html",
