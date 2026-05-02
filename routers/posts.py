@@ -12,6 +12,16 @@ from schemas import PostCreate, PostResponse, PostUpdate
 
 router = APIRouter()
 
+
+@router.get("", response_model=list[PostResponse])
+async def get_posts(db: Annotated[AsyncSession, Depends(get_db)]):
+    result = await db.execute(
+        select(models.Post).options(selectinload(models.Post.author)),
+    )
+    posts = result.scalars().all()
+    return posts
+
+
 @router.post(
     "",
     response_model=PostResponse,

@@ -99,20 +99,6 @@ async def user_posts_page(
     )
 
 
-
-
-
-@app.get("/api/posts", response_model=list[PostResponse])
-async def get_posts(db: Annotated[AsyncSession, Depends(get_db)]):
-    result = await db.execute(
-        select(models.Post).options(selectinload(models.Post.author)),
-    )
-    posts = result.scalars().all()
-    return posts
-
-
-## create_post
-
 ## StarletteHTTPException Handler
 @app.exception_handler(StarletteHTTPException)
 async def general_http_exception_handler(request: Request, exception: StarletteHTTPException):
