@@ -18,6 +18,7 @@ from auth import (
     oauth2_scheme,
     verify_access_token,
     verify_password,
+    CurrentUser,
 )
 
 from config import settings
