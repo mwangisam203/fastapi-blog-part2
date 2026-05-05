@@ -285,11 +285,18 @@
   <!-- Create Post Form Handler -->
   <script type="module">
     import { getErrorMessage, hideModal, showModal } from "/static/js/utils.js";
+    import {getToken} from '/static/js/auth.js';
 
     const createForm = document.getElementById("createPostForm");
 
     createForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      const token = getToken();
+      if (!token) {
+          window.location.href = '/login';
+          return;
+}
 
       const formData = new FormData(createForm);
       const postData = Object.fromEntries(formData.entries());
