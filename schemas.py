@@ -26,8 +26,7 @@ class UserPrivate(UserPublic):
 class UserUpdate(BaseModel):
     username: str | None = Field(default=None, min_length=3, max_length=65)
     email: EmailStr | None = Field(default=None, max_length=100)
-    image_file: str | None = Field(default=None, min_length=2, max_length=250)
-
+    
 
 class Token(BaseModel):
     access_token: str
