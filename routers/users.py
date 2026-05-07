@@ -217,8 +217,13 @@ async def delete_user(
             detail="User not found",
         )
 
+    old_filename = user.image_file
+
     await db.delete(user)
     await db.commit()
+
+    if old_filename:
+        delete_profile_image(old_filename)
 
 
 @router.patch("/{user_id}/picture", response_model=UserPrivate)
@@ -289,4 +294,3 @@ async def delete_user_picture(
     delete_profile_image(old_filename)
 
     return current_user
-
