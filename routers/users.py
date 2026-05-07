@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -11,6 +11,11 @@ from schemas import PostResponse, UserCreate, UserUpdate, UserPrivate, UserPubli
 
 from datetime import timedelta
 from fastapi.security import OAuth2PasswordRequestForm
+from PIL import UnidentifiedImageError
+
+from starlette.concurrency import run_in_threadpool
+
+from image_utils import delete_profile_image, process_profile_image
 
 from auth import (
     create_access_token,
@@ -214,3 +219,5 @@ async def delete_user(
 
     await db.delete(user)
     await db.commit()
+
+    
