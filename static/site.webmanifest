@@ -14,19 +14,19 @@
       "purpose": "any"
     },
     {
-      "src": "/static/icons/icon.svg",
+      "src": "/static/icons/sam-css-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/static/icons/icon-192.png",
-      "sizes": "192x192",
+      "src": "/static/icons/icon.png",
+      "sizes": "180x180",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/static/icons/icon-512.png",
+      "src": "/static/icons/original.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

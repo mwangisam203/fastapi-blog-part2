@@ -14,221 +14,277 @@ POPULATE_IMAGES_DIR = Path("populate_images")
 
 USERS = [
     {
-        "username": "CoreyMSchafer",
-        "email": "CoreyMSchafer@gmail.com",
+        "username": "SamKajeiy",
+        "email": "mwangisam203@gmail.com",
         "password": "TestPassword1!",
-        "image": "corey.png",
+        "image": "kanairo.jpg",
     },
     {
-        "username": "DefaultDude",
-        "email": "TestEmail2@test.com",
+        "username": "JubiTheGoat",
+        "email": "jubi@test.com",
         "password": "TestPassword2!",
-        # No image - uses default
+        "image": "jubi.jpg",
     },
     {
-        "username": "WillowTheCat",
-        "email": "TestEmail3@test.com",
+        "username": "DrakeMinion",
+        "email": "drake@test.com",
         "password": "TestPassword3!",
-        "image": "willow.png",
+        "image": "drake.png",
     },
     {
-        "username": "FarmDogs",
-        "email": "TestEmail4@test.com",
+        "username": "NairobiCoder",
+        "email": "nairobi@test.com",
         "password": "TestPassword4!",
-        "image": "farmdogs.png",
+        "image": "altman10.png",
     },
     {
-        "username": "PoppyTheCoder",
-        "email": "TestEmail5@test.com",
+        "username": "TechWithAisha",
+        "email": "aisha@test.com",
         "password": "TestPassword5!",
-        "image": "poppy.png",
+        "image": "aisha.jpg",
     },
     {
-        "username": "GoodBoyBronx",
-        "email": "TestEmail6@test.com",
+        "username": "BackendBrian",
+        "email": "brian@test.com",
         "password": "TestPassword6!",
-        "image": "bronx.png",
+        "image": "sam.jpg",
+    },
+    {
+        "username": "CloudQueen",
+        "email": "cloudqueen@test.com",
+        "password": "TestPassword7!",
+        "image": "babyelphant.png",
+    },
+    {
+        "username": "DockerDave",
+        "email": "dave@test.com",
+        "password": "TestPassword8!",
+        "image": "Eminem.jpg",
+    },
+    {
+        "username": "PostgressPro",
+        "email": "postgres@test.com",
+        "password": "TestPassword9!",
+        "image": "hack.png",
+    },
+    {
+        "username": "OpenSourceOliver",
+        "email": "oliver@test.com",
+        "password": "TestPassword10!",
+        "image": "boga.jpg",
     },
 ]
 
 POSTS = [
     {
-        "title": "Why I Love FastAPI",
-        "content": "FastAPI has completely changed how I build APIs. The automatic documentation, type hints, and async support make development so much faster. Plus, the performance is incredible!",
+        "title": "Why FastAPI is the Future of Python APIs",
+        "content": "I spent years building APIs with Flask and Django REST Framework. When I finally tried FastAPI, everything changed. The automatic docs, type hints, and blazing speed make it my go-to framework. If you haven't tried it yet, drop everything and start today.",
     },
     {
-        "title": "Corey Schafer Has the Best YouTube Tutorials!",
-        "content": "This was written by a viewer and definitely not by me... I mean him. Totally not written by him, but by me... a real viewer. Seriously, check out his channel for amazing Python content.",
+        "title": "My First Week Learning Python",
+        "content": "The first week learning Python felt like learning a new language — because it literally was. But unlike French class in high school, this one actually stuck. Indentation was the first thing that broke my brain. Coming from JavaScript, I kept adding curly braces out of habit.",
     },
     {
-        "title": "Async/Await Finally Clicked",
-        "content": "I've been struggling with async programming for months, but FastAPI's approach finally made it click. Using 'async def' for endpoints and 'await' for database calls just makes sense.",
+        "title": "SQLAlchemy 2.0 — Worth the Learning Curve",
+        "content": "If you're still using SQLAlchemy 1.x patterns, I get it — change is hard. But 2.0's new style with select() and mapped_column() is so much cleaner. Once it clicks, you'll never want to go back. Pair it with async and you have a seriously powerful setup.",
     },
     {
-        "title": "Schafer? I Barely Know Her!",
-        "content": "Is anyone actually reading these blog posts? Do they really need to say anything? I can keep going all day. At least AI can... Claude, keep going, please.",
+        "title": "Building in Public Changed My Career",
+        "content": "Six months ago I started pushing every project to GitHub and posting about what I was learning on LinkedIn. The response was unexpected. People started reaching out, offering advice, sharing resources. Building in public is the cheat code nobody tells you about.",
     },
     {
-        "title": "Pydantic Validation is Magic",
-        "content": "The way Pydantic handles validation in FastAPI is incredible. Define your model with type hints, and boom - automatic validation, serialization, and documentation. No more writing validation code by hand!",
+        "title": "Docker Finally Makes Sense",
+        "content": "I avoided Docker for two years because it seemed complicated. Then one day a senior dev sat with me for 20 minutes and walked me through it. Containers are just isolated environments. That's it. Now I Dockerize everything and I can't imagine going back.",
     },
     {
-        "title": "From Flask to FastAPI",
-        "content": "I made the switch from Flask to FastAPI last month. The learning curve was minimal, and the benefits are huge. Automatic OpenAPI docs, better performance, and native async support. No regrets!",
+        "title": "PostgreSQL vs SQLite — When to Use Which",
+        "content": "SQLite is perfect for development and small projects. Zero setup, file-based, fast. PostgreSQL is what you want in production — robust, concurrent, full-featured. Use SQLite to move fast, switch to PostgreSQL before you go live. FastAPI handles both beautifully.",
     },
     {
-        "title": "Some of My Favorite Horror Movies",
-        "content": "I love horror movies and practical effects. One of my favorites is 'The Thing'. Hereditary is a great modern one, but most people have seen it. One modern one I really liked that not as many people have seen is 'The Night House'. It's a slow burn but really effective. More psychological than jump-scare based.",
+        "title": "The Moment Async Programming Clicked",
+        "content": "I read about async/await for months before it actually clicked. Then someone explained it like this: imagine a chef who puts water on to boil and instead of standing there watching it, goes and chops vegetables. That's async. One thread, multiple things happening. Game changer.",
     },
     {
-        "title": "Type Hints Changed My Life",
-        "content": "I used to think type hints were just extra typing (pun intended). But after using FastAPI, I see how they enable incredible tooling - better autocomplete, automatic validation, and self-documenting code.",
+        "title": "Pydantic is My Favourite Python Library",
+        "content": "Define a class with type hints, and Pydantic handles validation, serialization, and documentation automatically. No more writing if statements to check if a field exists. No more try-except blocks around type casting. Just clean, validated data every time.",
     },
     {
-        "title": "The Power of Dependency Injection",
-        "content": "FastAPI's dependency injection system is so elegant. Need a database session? Just add it as a parameter. Need the current user? Same thing. It makes the code so clean and testable.",
+        "title": "Git Commit Messages Actually Matter",
+        "content": "I used to write commit messages like 'fix', 'update', 'changes'. Then I joined a team project and had to read other people's commit history. Now I write messages like 'fix: resolve 404 error on login route' and 'feat: add JWT authentication'. Future me says thank you.",
     },
     {
-        "title": "SQLAlchemy 2.0 Is Worth the Upgrade",
-        "content": "If you're still using SQLAlchemy 1.x patterns, it's time to upgrade. The new 2.0 style with select() and mapped_column() is much more explicit and works beautifully with async.",
+        "title": "How I Passed My First Technical Interview",
+        "content": "I bombed my first three technical interviews. The fourth one I passed. The difference? I stopped trying to memorize solutions and started learning patterns. Two pointers, sliding window, hash maps. Once you know the patterns, the problems become recognizable.",
     },
     {
-        "title": "Hot Take: Python > JavaScript for APIs",
-        "content": "Yes, I said it. For backend APIs, Python with FastAPI beats Node.js. Fight me in the comments. (Just kidding, this blog doesn't have comments... yet.)",
+        "title": "REST APIs in Plain English",
+        "content": "A REST API is just a waiter. You tell it what you want (request), it goes to the kitchen (server), and brings back your food (response). GET means bring me something. POST means create something new. PUT means update something. DELETE means remove it. That's really all there is to it.",
     },
     {
-        "title": "Understanding HTTP Status Codes",
-        "content": "200 OK, 201 Created, 400 Bad Request, 404 Not Found, 500 Internal Server Error. Learn these codes - they're how your API communicates with the world. FastAPI makes it easy to return the right ones.",
+        "title": "Why I Started Learning Backend Development",
+        "content": "I started with frontend — HTML, CSS, JavaScript. It was fun but I always wondered what happened when you clicked submit on a form. Where did the data go? How did it come back? That curiosity pulled me into backend. Now I can build both sides and it feels like a superpower.",
     },
     {
-        "title": "Some of My Favorite Video Games",
-        "content": "The one I probably play the most, but not my favorite, is League of Legends... It's a love/hate relationship. If you play, you get it. My favorites are all single-player RPGs. The Elder Scrolls series (Especially Morrowind and Skyrim) were awesome. The Baldur's Gate series took up a lot of my time as a kid, and more recently, the 3rd one was great. Speaking of Baldur's Gate, I love that old isometric style of RPG, so I looked for more modern equivalents and found Pillars of Eternity, which was fantastic. Also both Pathfinder: Kingmaker and Wrath of the Righteous were a lot of fun as well.",
+        "title": "JWT Authentication Explained Simply",
+        "content": "A JWT is like a signed wristband at a concert. The venue (server) gives it to you when you pay (login). Every time you want to get into a section (protected route), you show the wristband. The staff (server) checks the signature, not a database. Fast, stateless, elegant.",
     },
     {
-        "title": "JWT Authentication Demystified",
-        "content": "JSON Web Tokens seemed scary at first, but they're actually pretty simple. Encode some user data, sign it with a secret, and use it to verify requests. FastAPI + PyJWT makes it straightforward.",
+        "title": "The Best Free Resources for Learning Python",
+        "content": "Python.org official docs — underrated and thorough. Real Python — excellent in-depth tutorials. CS50P from Harvard — completely free and world class. Automate the Boring Stuff — practical and fun. YouTube channels like Corey Schafer and Tech With Tim. All free. No excuses.",
     },
     {
-        "title": "Tips for API Design",
-        "content": "Use nouns for resources (/users, /posts), HTTP verbs for actions (GET, POST, PUT, DELETE), and return consistent responses. FastAPI's response_model helps enforce this consistency.",
+        "title": "Dependency Injection Doesn't Have to Be Scary",
+        "content": "When I first heard 'dependency injection' I thought it was some advanced enterprise Java thing. In FastAPI it's just passing things your function needs as parameters. Need a database session? Add it as a parameter with Depends(). Need the current user? Same thing. Clean and simple.",
     },
     {
-        "title": "Path Parameters vs Query Parameters",
-        "content": "Use path parameters for required resource identifiers (/users/123) and query parameters for optional filters (/posts?author=corey&limit=10). FastAPI handles both beautifully with automatic validation.",
+        "title": "My Honest Review of VS Code",
+        "content": "VS Code wins on extensions. There's an extension for everything — Python linting, Git integration, database viewers, REST clients. The IntelliSense is sharp, it's fast, and it's free. I've tried PyCharm and Neovim. I always come back to VS Code. It just works.",
     },
     {
-        "title": "Error Handling Done Right",
-        "content": "Don't just return 500 for everything! Use HTTPException to return meaningful status codes and messages. Your API consumers will thank you when debugging issues.",
+        "title": "How Nairobi's Tech Scene Surprised Me",
+        "content": "Before I got into tech I didn't realize how vibrant Nairobi's developer community was. There are meetups, hackathons, boot camps, and communities everywhere. iHub, Moringa, Andela — these places are producing world-class engineers. If you're in Kenya and want to get into tech, the ecosystem is there.",
     },
     {
-        "title": "Why I Switched to UV",
-        "content": "UV is blazingly fast for Python package management. Install packages in milliseconds instead of minutes. If you haven't tried it yet, you're missing out!",
+        "title": "Understanding HTTP Status Codes Once and for All",
+        "content": "2xx means success. 200 OK. 201 Created. 204 No Content. 3xx means redirect. 4xx means the client did something wrong. 400 Bad Request. 401 Unauthorized. 403 Forbidden. 404 Not Found. 422 Validation Error. 5xx means the server messed up. 500 Internal Server Error. Memorize these.",
     },
     {
-        "title": "What About Favorite Books?",
-        "content": "I don't read a lot of fiction. The last fiction book I read was 'The Martian' by Andy Weir, which I really enjoyed. But most of my reading is non-fiction. Some of my favorites are 'Meditations' by Marcus Aurelius, 'Conscious' by Annaka Harris, 'How to Die' by Seneca, and 'The Last Lecture' by Randy Pausch. The latest fiction book I'm reading through (and have been for a while) is 'House of Leaves' by Mark Z. Danielewski. It's... different, but awesome.",
+        "title": "Why I Use UV Instead of pip",
+        "content": "pip works. UV is just faster. Dramatically faster. Installing packages that used to take 30 seconds now take 2. It also handles virtual environments cleanly. Once you switch you'll wonder how you ever tolerated pip's speed. It's built in Rust which explains everything.",
     },
     {
-        "title": "Testing FastAPI Applications",
-        "content": "FastAPI's TestClient makes testing a breeze. Write tests for your endpoints, mock dependencies, and catch bugs before they hit production. Your future self will thank you.",
+        "title": "The Power of Environment Variables",
+        "content": "Never hardcode a password, API key, or secret in your code. Not even once. Not even in a private repo. Use environment variables. Use a .env file. Add .env to .gitignore immediately. Use pydantic-settings to load them cleanly in FastAPI. This is not optional — it's Security 101.",
     },
     {
-        "title": "Environment Variables and Security",
-        "content": "Never hardcode secrets! Use environment variables and pydantic-settings to keep your API keys, database URLs, and JWT secrets safe. It's Security 101.",
+        "title": "Cloud Computing for Absolute Beginners",
+        "content": "The cloud is just someone else's computer. AWS, GCP, Azure — they're all just massive data centers you can rent compute from. EC2 is a virtual machine. S3 is file storage. RDS is a managed database. Lambda is code that runs without a server. Start with one service and expand from there.",
     },
     {
-        "title": "CORS: The Bane of Frontend Devs",
-        "content": "Getting CORS errors? FastAPI's CORSMiddleware is your friend. Just remember: be specific about allowed origins in production. Don't use '*' unless you really mean it.",
+        "title": "What Nobody Tells You About Being a Junior Developer",
+        "content": "You will Google things every single day. Senior developers Google things every single day. The skill isn't memorizing syntax — it's knowing what to search for, how to read documentation, and how to debug efficiently. Stack Overflow, GitHub issues, and official docs are your best friends.",
     },
     {
-        "title": "Async Database Queries",
-        "content": "Blocking database calls in async code? That's a performance killer. Use async drivers like psycopg (for PostgreSQL) or aiosqlite to keep your event loop happy.",
+        "title": "CORS Errors and How to Actually Fix Them",
+        "content": "CORS errors feel personal. Like the browser is personally rejecting you. But it's just a security feature. Your frontend and backend are on different origins, so the browser blocks the request. In FastAPI, add CORSMiddleware with your allowed origins. In production, be specific. Never use '*' in production.",
     },
     {
-        "title": "The Beauty of Response Models",
-        "content": "Response models aren't just for documentation - they filter out sensitive fields automatically. Define what goes out, and Pydantic handles the rest.",
+        "title": "Async vs Sync Routes in FastAPI — Which to Use",
+        "content": "Use async def when you're doing I/O — database calls, HTTP requests, file reads. Use def for CPU-bound work or when using sync libraries. FastAPI handles both gracefully. Mixing them incorrectly is where performance problems creep in. When in doubt, async def with await is the right call.",
     },
     {
-        "title": "Let's Talk Board Games",
-        "content": "I love Settlers of Catan. It's a classic for a reason. I'm actually going to make a sword in my woodshop soon that will be my friend group's trophy for the annual Catan champion that we're going to call 'The Katana of Catan'. One thing I've always wanted to do, but never have, is play an in-person Dungeons & Dragons campaign. I've played so many D&D inspired video games, but never the real deal. Hopefully someday...",
+        "title": "The Day I Understood Decorators",
+        "content": "Python decorators confused me for months. Then I realized — a decorator is just a function that wraps another function. @app.get('/') is just FastAPI's way of saying 'register this function as a GET handler for this path'. Once that clicked, decorators went from magic to just... Python.",
     },
     {
-        "title": "API Versioning Strategies",
-        "content": "APIs evolve. Version them from day one! Whether you use URL prefixes (/v1/users) or headers, plan for change. Breaking changes without versioning breaks trust.",
+        "title": "Freelancing as a Developer in Africa",
+        "content": "Upwork, Fiverr, Toptal — the platforms exist. The competition is global. The advantage of being based in Africa is that your cost of living is lower, meaning you can price competitively and still earn well relative to your market. Build a strong portfolio, get a few reviews, and compound from there.",
     },
     {
-        "title": "Background Tasks in FastAPI",
-        "content": "Don't make users wait for emails to send or files to process. FastAPI's BackgroundTasks lets you return immediately while work continues in the background.",
+        "title": "My Favourite Programming Quotes",
+        "content": "'Make it work, make it right, make it fast' — Kent Beck. 'Programs must be written for people to read, and only incidentally for machines to execute' — Harold Abelson. 'The best code is no code at all' — Jeff Atwood. These three quotes guide how I write code every day.",
     },
     {
-        "title": "Rate Limiting Your API",
-        "content": "Protect your API from abuse with rate limiting. Too many requests? Return 429 Too Many Requests. Your server (and your wallet) will thank you.",
+        "title": "Routers in FastAPI — Keeping Code Clean",
+        "content": "Putting every route in main.py works until it doesn't. Once you have 20+ endpoints, that file becomes chaos. FastAPI's APIRouter lets you split routes into separate files by feature — users.py, posts.py, auth.py — and include them cleanly in main.py. Do this from day one.",
     },
     {
-        "title": "Documentation That Writes Itself",
-        "content": "Add docstrings to your endpoints and they appear in Swagger UI. Add examples to your Pydantic models and they show up too. Documentation has never been this easy.",
+        "title": "How to Read a Stack Trace",
+        "content": "When your code breaks, read the error from the bottom up. The last line tells you what went wrong. Scan upward for YOUR file — ignore the library code. Go to that exact line. Read the error message slowly — it almost always tells you exactly what to fix. Most bugs are solved in under 5 minutes this way.",
     },
     {
-        "title": "WebSockets with FastAPI",
-        "content": "REST isn't the only game in town. FastAPI supports WebSockets for real-time communication. Chat apps, live updates, notifications - all possible!",
+        "title": "Hashing Passwords — Why You Never Store Plain Text",
+        "content": "Storing passwords in plain text is one of the worst things you can do as a developer. If your database is ever compromised, every user's password is exposed. Use bcrypt or passlib to hash passwords before storing. The hash is one-way — you can verify but never reverse. This is non-negotiable.",
     },
     {
-        "title": "Favorite Hobbies, You Ask?",
-        "content": "Woodworking, hands down. I love making things with wood, but I wish I had more time for it. There's something special about making something with your own hands, with materials that are local. A lot of the stuff I've built came from trees that fell on my family's property. My stuff might not always be as good as something you buy in a store, but there's a story and a connection there that makes it better than anything I could buy elsewhere.",
+        "title": "Open Source Contribution — Where to Start",
+        "content": "Find a project you actually use. Read the contributing guide. Look for issues tagged 'good first issue'. Fix a typo in the docs. Add a missing test. Submit a small PR. Get feedback. Iterate. Your first contribution doesn't need to be impressive — it just needs to be real.",
     },
     {
-        "title": "Custom Validators in Pydantic",
-        "content": "Need validation beyond type checking? Pydantic's field_validator and model_validator decorators let you add custom logic. Validate emails, check password strength, whatever you need.",
+        "title": "What I Wish I Knew Before Learning to Code",
+        "content": "I wish someone told me that confusion is the process, not a sign you're failing. That copying code without understanding it is the slowest way to learn. That building something broken and fixing it teaches more than any tutorial. And that consistency — even 30 minutes a day — compounds into expertise.",
     },
     {
-        "title": "The ORM vs Raw SQL Debate",
-        "content": "ORMs like SQLAlchemy add abstraction but can hide performance issues. Know when to use the ORM and when to drop to raw SQL. Both have their place.",
+        "title": "Postman vs curl — Pick Your Weapon",
+        "content": "Both test APIs. Postman gives you a GUI — great for exploring and saving requests. curl is terminal-based — great for scripting and automation. I use Postman when building, curl when scripting. FastAPI's built-in Swagger UI is actually excellent for quick testing too. Use all three.",
     },
     {
-        "title": "Debugging Async Code",
-        "content": "Async bugs can be tricky. Use logging liberally, understand the event loop, and don't mix sync and async without care. asyncio.run() is your entry point.",
+        "title": "Why Python's simplicity is Deceptive",
+        "content": "Python looks easy because the syntax is clean. But mastering Python — decorators, generators, context managers, async, metaclasses — takes years. The barrier to entry is low. The ceiling is incredibly high. Don't mistake readable syntax for a simple language. Python rewards the curious.",
     },
     {
-        "title": "Containerizing FastAPI Apps",
-        "content": "Docker + FastAPI = deployment bliss. Create a Dockerfile, build your image, and deploy anywhere. Consistency across environments is priceless.",
+        "title": "Response Models Are Your Security Layer",
+        "content": "Your database model might have a password_hash field. Your response model should absolutely not. Define what goes out using response_model in your FastAPI route and Pydantic will filter everything else out automatically. This is the easiest security win in FastAPI. Use it always.",
     },
     {
-        "title": "Health Check Endpoints",
-        "content": "Add a /health endpoint to your API. Load balancers and orchestrators need to know if your service is alive. Return 200 if healthy, details if not. I didn't do this in this tutorial, but there's only so much time in a video!",
+        "title": "The Importance of Naming Things Well",
+        "content": "get_user vs fetch_user_data_from_database_by_id_and_return — one of these is good naming. Variables, functions, and files should say what they do without needing a comment. If you need a comment to explain what a variable is, rename the variable. Good naming is a form of documentation.",
     },
     {
-        "title": "Hmm... What Else?",
-        "content": "I'm running out of ideas for these blog posts. Maybe I should just write about how great FastAPI is... Oh wait, I've already done that multiple times. Well, if you're still reading, thanks for sticking with it! You're awesome.",
+        "title": "Testing Your API — Why Bother",
+        "content": "Because future you will thank present you. Write tests for your endpoints. FastAPI's TestClient makes it straightforward. Test the happy path. Test edge cases. Test what happens with invalid input. A test suite lets you refactor confidently without wondering if you broke something.",
     },
     {
-        "title": "Pagination: Don't Return Everything",
-        "content": "Returning 10,000 records in one response? Please don't. Implement pagination with limit and offset (or better, cursor-based). Your database and clients will be happier.",
+        "title": "Background Tasks — Don't Make Users Wait",
+        "content": "User submits a form, your API sends a confirmation email. Don't make them wait for the email to send before returning a response. Use FastAPI's BackgroundTasks to fire off the email after returning 200. Instant response, email sends in the background. Users are happy. Everyone wins.",
     },
     {
-        "title": "OpenAPI Schema Customization",
-        "content": "FastAPI's auto-generated OpenAPI schema is great, but sometimes you need to customize. Add examples, descriptions, and tags to make your docs shine.",
+        "title": "The Art of Writing Good Commit Messages",
+        "content": "Use the imperative mood: 'Add login route' not 'Added login route'. Keep the subject under 50 characters. Reference issue numbers when relevant. A good commit message tells the story of why, not just what. Your git log should read like a changelog, not a mystery novel.",
     },
     {
-        "title": "Security Headers Matter",
-        "content": "Add security headers to your responses: X-Content-Type-Options, X-Frame-Options, Content-Security-Policy. Small effort, big security improvement.",
+        "title": "My Experience at Moringa School",
+        "content": "Moringa School was intense. Nine months of full-stack development, built on top of the pressure of daily projects, peer reviews, and technical assessments. What it gave me was a foundation — Python, JavaScript, React, REST APIs, databases, Git. And a network of developers building things across East Africa.",
     },
     {
-        "title": "Caching Strategies",
-        "content": "Not every request needs to hit the database. Use caching with Redis or even in-memory for frequently accessed data. Your response times will plummet (in a good way).",
+        "title": "Why Documentation is a Developer's Best Friend",
+        "content": "I used to skip documentation and go straight to Stack Overflow. Bad habit. Official docs are written by the people who built the thing. FastAPI's docs are exceptional — clear, example-heavy, and comprehensive. Read them. Then read them again. You'll find things you missed every time.",
     },
     {
-        "title": "GraphQL vs REST",
-        "content": "GraphQL is trendy, but REST is battle-tested. Choose based on your needs, not hype. FastAPI excels at REST, but Strawberry brings GraphQL if you need it.",
+        "title": "Understanding Middleware in FastAPI",
+        "content": "Middleware sits between every request and your route handlers. It runs before and after. Use it for logging, authentication checks, adding response headers, rate limiting, CORS. It's one of those features that seems advanced until you use it, and then you wonder how you lived without it.",
     },
     {
-        "title": "Movie Quotes!",
-        "content": "'You wanna know how I did it? This is how I did it, Anton. I never saved anything for the swim back.' - 'Gattaca'. One of my favorite movies of all time. As silly as it sounds, that movie is actually one of the main reasons I decided to pursue an internship at NASA back in college. After that internship, I found I had a craving to learn and do more. It pushed me to take programming more seriously, which eventually led me to where I am today... Which is writing a blog post about FastAPI that's just meant to fill space. TLDR: I watched Gattaca and now I'm writing sample blog posts at 3am on a Saturday for this FastAPI tutorial. And you can too!",
+        "title": "The Difference Between Authentication and Authorization",
+        "content": "Authentication is proving who you are — logging in with username and password. Authorization is proving what you're allowed to do — can you delete this post or only your own? JWT handles authentication. Your route logic handles authorization. Both matter. Don't confuse them.",
+    },
+    {
+        "title": "Pagination — Don't Return Everything at Once",
+        "content": "Returning 10,000 records in a single API response is a performance disaster. Implement pagination. limit and offset is the simplest approach. Cursor-based pagination is better for large datasets. FastAPI makes both easy to implement. Your database, server, and users will all thank you.",
+    },
+    {
+        "title": "Lessons From Debugging for 6 Hours",
+        "content": "Last week I spent 6 hours debugging an issue that turned out to be a missing comma in a dictionary. SIX HOURS. The lesson: take breaks. Fresh eyes catch what tired eyes miss. Rubber duck debug — explain the problem out loud. And read error messages slowly. They almost always point to the answer.",
+    },
+    {
+        "title": "Why Every Developer Should Learn SQL",
+        "content": "ORMs are great until they're not. When you need to optimize a slow query, understand what your ORM is generating, or write a complex join, SQL knowledge saves you. Learn SELECT, WHERE, JOIN, GROUP BY, and indexes. These fundamentals never go out of style regardless of what ORM you use.",
+    },
+    {
+        "title": "Containerizing a FastAPI App with Docker",
+        "content": "Write a Dockerfile. FROM python:3.12-slim. COPY requirements. RUN pip install. COPY your app. CMD uvicorn. Build the image. Run the container. Deploy anywhere. That's the beauty of Docker — consistency across every environment. Works on my machine AND in production. Finally.",
+    },
+    {
+        "title": "Rate Limiting — Protect Your API",
+        "content": "Without rate limiting, one bad actor can bring down your API with a flood of requests. Implement rate limiting — restrict requests per IP, per user, or per endpoint. Return 429 Too Many Requests when the limit is hit. It's one of those things you don't think about until you need it desperately.",
+    },
+    {
+        "title": "The Compounding Effect of Learning Every Day",
+        "content": "30 minutes of learning every day sounds modest. But that's 182 hours in a year. 182 hours of focused Python, FastAPI, SQL, Docker, cloud. That's the equivalent of multiple university courses. Compound interest applies to skills too. Start small. Stay consistent. The results will shock you.",
+    },
+    {
+        "title": "What Building Real Projects Taught Me That Tutorials Never Could",
+        "content": "Tutorials show you the happy path. Real projects show you everything else. The cryptic error at 2am. The dependency that breaks everything. The feature that seemed simple but wasn't. The refactor that touched 15 files. Real projects are frustrating and messy and slow — and they're where real learning happens.",
+    },
+    {
+        "title": "GraphQL vs REST — My Honest Take",
+        "content": "REST is battle-tested, simple, and well understood. GraphQL is flexible and powerful for complex data needs. For most projects — especially starting out — REST is the right choice. Learn it deeply first. GraphQL solves real problems, but problems you probably don't have yet. Master the fundamentals first.",
     },
 ]
 
-POST_44 = {
-    "title": "Fun Fact: My High School Football Number Was #44",
-    "content": "If you've paginated all the way to this post, the 44th one... you get to learn this fun fact: that my high school football number was #44. Other notable absolute legends who wore number #44 include: Jerry West (NBA - Also fellow WV Native), Hank Aaron (MLB), and Floyd Little (NFL).",
+POST_51 = {
+    "title": "Fun Fact: I Once Debugged a Bug for 3 Days That Was Just a Typo",
+    "content": "If you've paginated all the way to this post — the 51st one — you deserve to know this: I once spent three full days hunting a bug that turned out to be a variable named 'recieve' instead of 'receive'. Three days. The compiler didn't catch it. My eyes didn't catch it. A fresh pair of eyes caught it in 30 seconds. Always get a second pair of eyes. Always.",
 }
 
 
@@ -258,7 +314,7 @@ async def update_post_dates() -> None:
         if not posts:
             return
 
-        # First post (POST_44) is the oldest - ~90 days ago
+        # First post (POST_51) is the oldest - ~90 days ago
         await db.execute(
             update(models.Post)
             .where(models.Post.id == posts[0].id)
@@ -293,7 +349,7 @@ async def populate() -> None:
         users: list[dict] = []
 
         print(f"\nCreating {len(USERS)} users...")
-        for user_data in USERS:
+        for user_data in USERS:                                     # FIX 3: entire block is inside this loop
             response = await client.post(
                 "/api/users",
                 json={
@@ -317,36 +373,56 @@ async def populate() -> None:
             token = response.json()["access_token"]
 
             if image_name := user_data.get("image"):
-                image_path = POPULATE_IMAGES_DIR / image_name
-                if image_path.exists():
+                if image_name.startswith("http"):
+                    # FIX 1: removed `import httpx` from here
+                    # FIX 2: reuse existing `client` instead of httpx.AsyncClient()
+                    avatar_response = await client.get(image_name)
+                    avatar_response.raise_for_status()
                     response = await client.patch(
                         f"/api/users/{user['id']}/picture",
                         files={
                             "file": (
-                                image_name,
-                                image_path.read_bytes(),
-                                "image/png",
+                                "avatar.svg",
+                                avatar_response.content,
+                                "image/svg+xml",
                             ),
                         },
                         headers={"Authorization": f"Bearer {token}"},
                     )
                     response.raise_for_status()
-                    print(f"    Uploaded: {image_name}")
+                    print(f"    Uploaded avatar from URL: {image_name}")
+                else:
+                    # Handle local file
+                    image_path = POPULATE_IMAGES_DIR / image_name
+                    if image_path.exists():
+                        response = await client.patch(
+                            f"/api/users/{user['id']}/picture",
+                            files={
+                                "file": (
+                                    image_name,
+                                    image_path.read_bytes(),
+                                    "image/png",
+                                ),
+                            },
+                            headers={"Authorization": f"Bearer {token}"},
+                        )
+                        response.raise_for_status()
+                        print(f"    Uploaded: {image_name}")
 
-            users.append(
+            users.append(                                           # FIX 3: also inside the loop now
                 {"id": user["id"], "username": user["username"], "token": token},
             )
 
         print(f"\nCreating {len(POSTS) + 1} posts...")
 
-        # First create POST_44 (will become oldest after date update)
+        # First create POST_51 (will become oldest after date update)
         response = await client.post(
             "/api/posts",
-            json={"title": POST_44["title"], "content": POST_44["content"]},
+            json={"title": POST_51["title"], "content": POST_51["content"]},
             headers={"Authorization": f"Bearer {users[0]['token']}"},
         )
         response.raise_for_status()
-        print(f"  Created: '{POST_44['title']}'")
+        print(f"  Created: '{POST_51['title']}'")
 
         # Create remaining posts in reverse (last in list = oldest, first = newest)
         for i, post_data in enumerate(reversed(POSTS)):
