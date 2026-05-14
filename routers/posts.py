@@ -7,12 +7,12 @@ from sqlalchemy.orm import selectinload
 from auth import CurrentUser
 import models
 from database import get_db
-from schemas import PostCreate, PostResponse, PostUpdate, PaginatedPostResponse
+from schemas import PostCreate, PostResponse, PostUpdate, PaginatedPostsResponse
 
 router = APIRouter()
 
 
-@router.get("", response_model=PaginatedPostResponse)
+@router.get("", response_model=PaginatedPostsResponse)
 async def get_posts(
     db: Annotated[AsyncSession, Depends(get_db)],
     skip: Annotated[int, Query(ge=0)] = 0,
@@ -29,7 +29,16 @@ async def get_posts(
         .limit(limit),
     )
     posts = result.scalars().all()
-    return posts
+
+    has_more = skip + len(posts) < total
+
+    return PaginatedPostsResponse(
+        posts=[PostResponse.model_validate(post) for post in posts],
+        total=total,
+        skip=skip,
+        limit=limit,
+        has_more=has_more,
+    )
 
 
 @router.post(
