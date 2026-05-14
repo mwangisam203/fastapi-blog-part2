@@ -18,10 +18,15 @@ async def get_posts(
     skip: Annotated[int, Query(ge=0)] = 0,
     limit: Annotated[int, Query(ge=1, le=100)] = 10,
 ):
+    count_result = await db.execute(select(func.count()).select_from(models.Post))
+    total = count_result.scalar() or 0
+
     result = await db.execute(
         select(models.Post)
         .options(selectinload(models.Post.author))
-        .order_by(models.Post.date_posted.desc()),
+        .order_by(models.Post.date_posted.desc())
+        .offset(skip)
+        .limit(limit),
     )
     posts = result.scalars().all()
     return posts
