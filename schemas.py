@@ -23,15 +23,16 @@ class UserPublic(BaseModel):
 class UserPrivate(UserPublic):
     email: EmailStr
 
+
 class UserUpdate(BaseModel):
     username: str | None = Field(default=None, min_length=3, max_length=65)
     email: EmailStr | None = Field(default=None, max_length=100)
-    
+
 
 class Token(BaseModel):
     access_token: str
     token_type: str
-    
+
 
 class PostBase(BaseModel):
     title: str = Field(min_length=2, max_length=90)
@@ -39,7 +40,7 @@ class PostBase(BaseModel):
 
 
 class PostCreate(PostBase):
-    pass 
+    pass
 
 
 class PostUpdate(BaseModel):
@@ -55,6 +56,7 @@ class PostResponse(PostBase):
     date_posted: datetime
     author: UserPublic
 
+
 class PaginatedPostsResponse(BaseModel):
     posts: list[PostResponse]
     total: int
@@ -62,3 +64,16 @@ class PaginatedPostsResponse(BaseModel):
     limit: int
     has_more: bool
 
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr = Field(max_length=120)
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(min_length=8)
+
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=8)
