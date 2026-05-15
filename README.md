@@ -1,152 +1,572 @@
-# 📝 FastAPI Blog
+# FastAPI Blog
 
-A personal blog web application built with **FastAPI**, **Jinja2 templates**, and **Bootstrap 5**. This project is part of my backend development journey — learning Python, REST APIs, SQL, PostgreSQL, Docker, and cloud infrastructure by building real things.
+A full-stack blog application built with FastAPI, SQLAlchemy, Jinja2 templates, Bootstrap, and vanilla JavaScript.
 
----
+This project started as a simple blog page and has grown into a real web app with users, authentication, post CRUD, profile pictures, pagination, password reset flow, custom error handling, and seed data.
 
-## 🚀 Tech Stack
+## What The App Does
 
-| Layer | Technology |
-|---|---|
-| Backend | Python, FastAPI |
-| Templating | Jinja2 |
-| Styling | Bootstrap 5, Custom CSS |
-| Static Files | FastAPI StaticFiles |
-| Server | Uvicorn (ASGI) |
-| Fonts | Google Fonts (Montserrat, Nunito) |
+- Shows a home feed of blog posts ordered by newest first.
+- Loads more posts with JavaScript pagination instead of a full page refresh.
+- Lets users register, log in, and keep a JWT access token in localStorage.
+- Lets authenticated users create posts from the navbar modal.
+- Lets post owners edit or delete their own posts.
+- Shows individual post pages.
+- Shows user-specific post pages.
+- Lets users update their username and email.
+- Lets users upload and preview profile pictures.
+- Lets users change their password from the account page.
+- Supports forgot-password and reset-password pages.
+- Stores reset tokens hashed in the database.
+- Seeds the database with users, posts, and local profile images.
+- Serves static assets from `static/` and uploaded profile images from `media/`.
+- Returns JSON errors for `/api/...` routes and HTML error pages for browser routes.
 
----
+## Tech Stack
 
-## 📁 Project Structure
+| Area | Tools |
+| --- | --- |
+| Backend | Python 3.12, FastAPI |
+| Server | Uvicorn / FastAPI standard CLI |
+| Database | SQLite with async SQLAlchemy |
+| ORM | SQLAlchemy 2.x async models and sessions |
+| Validation | Pydantic |
+| Auth | JWT, OAuth2 password form, pwdlib Argon2 password hashing |
+| Templates | Jinja2 |
+| Frontend | HTML, CSS, Bootstrap 5, vanilla JavaScript modules |
+| Images | Pillow for profile image processing |
+| Email | aiosmtplib for password reset email |
+| Seeding | httpx ASGITransport against the local FastAPI app |
 
-```
-fastapi-blog/
-├── main.py                  # FastAPI app, routes and post data
+## Project Structure
+
+```text
+fastapi-blog2/
+├── main.py                         # App setup, HTML page routes, error handlers
+├── database.py                     # Async SQLite engine/session setup
+├── models.py                       # SQLAlchemy User, Post, PasswordResetToken models
+├── schemas.py                      # Pydantic request/response models
+├── auth.py                         # Password hashing, JWT, reset-token hashing, current-user dependency
+├── email_utils.py                  # Password reset email rendering/sending
+├── image_utils.py                  # Profile image processing and deletion
+├── populate_db.py                  # Clears and seeds users/posts/profile images
+├── config.py                       # Environment-driven settings
+├── routers/
+│   ├── posts.py                    # JSON API for posts
+│   └── users.py                    # JSON API for users/auth/password/profile images
 ├── templates/
-│   ├── layout.html          # Base template (navbar, footer, theme toggle)
-│   └── home.html            # Home page — lists all blog posts
+│   ├── layout.html                 # Base layout, navbar, modals, create-post JS
+│   ├── home.html                   # Main feed and load-more posts JS
+│   ├── post.html                   # Single post page with owner actions
+│   ├── user_posts.html             # Posts by one user with pagination
+│   ├── account.html                # Profile, image upload, password change, delete account
+│   ├── login.html
+│   ├── register.html
+│   ├── forgot_password.html
+│   ├── reset_password.html
+│   ├── error.html
+│   └── email/
+│       └── password_reset.html     # HTML email template
 ├── static/
-│   ├── css/
-│   │   └── main.css         # Custom styles + dark mode + animations
-│   ├── images/
-│   │   └── profilep.jpeg    # Author profile picture
+│   ├── css/main.css
+│   ├── js/auth.js                  # Token/current-user helpers
+│   ├── js/utils.js                 # Shared modal/error/date/html helpers
 │   ├── icons/
-│   │   ├── favicon.ico
-│   │   ├── icon.svg
-│   │   └── icon.png
-│   └── site.webmanifest
-└── .venv/                   # Python virtual environment
+│   └── profile_pics/profile.jpeg   # Default profile image
+├── media/profile_pics/             # Uploaded/generated profile pictures
+├── populate_images/                # Local seed images used by populate_db.py
+├── pyproject.toml
+└── uv.lock
 ```
 
----
+## Main Pages
 
-## ⚙️ Features
+| Page | Route | Purpose |
+| --- | --- | --- |
+| Home | `/` or `/posts` | Server-rendered post feed |
+| Single post | `/posts/{post_id}` | Read one post, edit/delete if owner |
+| User posts | `/users/{user_id}/posts` | Posts from one author |
+| Register | `/register` | Create an account |
+| Login | `/login` | Log in and store access token |
+| Account | `/account` | Manage profile, image, password, delete account |
+| Forgot password | `/forgot-password` | Request reset email |
+| Reset password | `/reset-password?token=...` | Set a new password |
+| API docs | `/docs` | Swagger UI |
+| ReDoc | `/redoc` | ReDoc API docs |
 
-- **Blog post listing** — Posts displayed as cards with author, date, title and content
-- **Author profile pictures** — Circular profile images per post
-- **Light / Dark / Auto theme toggle** — Persisted via localStorage
-- **Responsive design** — Mobile-friendly via Bootstrap 5 grid
-- **Smooth animations** — Card lift on hover, title underline animation, sidebar slide effect
-- **REST API endpoints** — JSON responses available alongside the HTML views
-- **FastAPI auto docs** — Available at `/docs` (Swagger UI)
+## API Overview
 
----
+### Posts
 
-## 🛣️ API Endpoints
+| Method | Endpoint | Auth | Description |
+| --- | --- | --- | --- |
+| `GET` | `/api/posts?skip=0&limit=10` | No | Paginated posts |
+| `POST` | `/api/posts` | Yes | Create a post |
+| `GET` | `/api/posts/{post_id}` | No | Get one post |
+| `PUT` | `/api/posts/{post_id}` | Owner | Replace title/content |
+| `PATCH` | `/api/posts/{post_id}` | Owner | Partially update title/content |
+| `DELETE` | `/api/posts/{post_id}` | Owner | Delete a post |
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/` | Home page (HTML) |
-| `GET` | `/posts` | Returns all posts as JSON |
-| `GET` | `/posts/{post_id}` | Returns a single post by ID |
-| `GET` | `/docs` | Swagger UI (auto-generated) |
+### Users And Auth
 
----
-🔥 Error Handling
-The app has custom error handlers for clean error responses — both for API routes (JSON) and browser routes (HTML error page).
-HTTP Exception Handler
-Catches all standard HTTP errors (404, 403, 500, etc.). If the request is to an /api route, it returns a JSON response. Otherwise it renders a custom error.html template.
+| Method | Endpoint | Auth | Description |
+| --- | --- | --- | --- |
+| `POST` | `/api/users` | No | Register user |
+| `POST` | `/api/users/token` | No | Log in, returns JWT |
+| `GET` | `/api/users/me` | Yes | Current user |
+| `POST` | `/api/users/forgot-password` | No | Send reset email if account exists |
+| `POST` | `/api/users/reset-password` | No | Reset password with token |
+| `PATCH` | `/api/users/me/password` | Yes | Change current password |
+| `GET` | `/api/users/{user_id}` | No | Public user info |
+| `GET` | `/api/users/{user_id}/posts` | No | Paginated posts by user |
+| `PATCH` | `/api/users/{user_id}` | Same user | Update username/email |
+| `DELETE` | `/api/users/{user_id}` | Same user | Delete user and posts |
+| `PATCH` | `/api/users/{user_id}/picture` | Same user | Upload profile picture |
+| `DELETE` | `/api/users/{user_id}/picture` | Same user | Delete profile picture |
 
-Validation Error Handler
-Catches FastAPI's RequestValidationError (triggered when request data fails validation). API routes get a detailed JSON error, browser routes get a friendly error page.
-Key design decision: The handlers check request.url.path.startswith("/api") to serve the right response format — JSON for API consumers, HTML for browser users.
+## Requirements
 
-## 🏁 Getting Started
+- Python 3.12+
+- SQLite, included with Python
+- A terminal
+- Optional: an SMTP service if you want real password reset emails
 
-### 1. Clone the repository
+The project already has `pyproject.toml` and `uv.lock`, so using `uv` is the smoothest path. Plain `pip` also works.
+
+## Setup With `uv`
+
+Install `uv` if needed:
 
 ```bash
-git clone https://github.com/yourusername/fastapi-blog.git
-cd fastapi-blog
+pip install uv
 ```
 
-### 2. Create and activate a virtual environment
+Create the virtual environment and install dependencies:
+
+```bash
+uv sync
+```
+
+Activate the virtual environment:
+
+```bash
+source .venv/bin/activate
+```
+
+Create a `.env` file:
+
+```bash
+touch .env
+```
+
+Add at least this:
+
+```env
+SECRET_KEY=change-this-to-a-long-random-secret
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+POSTS_PER_PAGE=10
+RESET_TOKEN_EXPIRE_MINUTES=60
+FRONTEND_URL=http://localhost:8000
+```
+
+Run the app:
+
+```bash
+uv run fastapi dev main.py
+```
+
+Or:
+
+```bash
+uv run uvicorn main:app --reload
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Setup With Plain `pip`
+
+Create and activate a virtual environment:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+Install the dependencies:
 
 ```bash
-pip install fastapi uvicorn jinja2 python-multipart
+pip install "fastapi[standard]" sqlalchemy aiosqlite greenlet pydantic-settings pyjwt "pwdlib[argon2]" pillow httpx aiosmtplib
 ```
 
-### 4. Run the development server
+Create `.env`:
+
+```bash
+touch .env
+```
+
+Add:
+
+```env
+SECRET_KEY=change-this-to-a-long-random-secret
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+POSTS_PER_PAGE=10
+RESET_TOKEN_EXPIRE_MINUTES=60
+FRONTEND_URL=http://localhost:8000
+```
+
+Run:
 
 ```bash
 uvicorn main:app --reload
 ```
 
-### 5. Open in your browser
+## Database
 
+The app uses SQLite:
+
+```text
+blog.db
 ```
-http://127.0.0.1:8000
+
+The async database URL is defined in `database.py`:
+
+```text
+sqlite+aiosqlite:///./blog.db
 ```
 
----
+Tables are created automatically when the FastAPI app starts:
 
-## 🧠 What I Learned Building This
+```python
+await conn.run_sync(Base.metadata.create_all)
+```
 
-- How FastAPI handles routing, request objects and template responses
-- The difference between sync and async route handlers
-- How Jinja2 template inheritance works (`layout.html` → `home.html`)
-- Serving static files (CSS, images, icons) with FastAPI's `StaticFiles`
-- How Bootstrap 5's grid system and dark mode theming works
-- Debugging `TypeError: unhashable type: 'dict'` — caused by passing arguments in the wrong order to `TemplateResponse`
-- How Starlette's newer `TemplateResponse` signature requires `request` as a direct keyword argument, not inside the context dict
+Current tables:
 
----
+- `users`
+- `posts`
+- `password_reset_tokens`
 
-## 🐛 Known Issues / Work in Progress
+There is no migration tool yet. If you change models during development and SQLite does not match the new schema, the simplest development reset is to delete `blog.db` and run the app or seed script again.
 
-- Posts are currently hardcoded in `main.py` — database integration (PostgreSQL) coming soon
-- Login and Register buttons are placeholders — authentication coming soon
-- No user accounts or profile management yet
-- Docker and cloud deployment coming in future phases
+## Seeding The Database
 
----
+`populate_db.py` clears existing users/posts/profile pictures and creates seed data.
 
-## 🗺️ Roadmap
+Run:
 
-- [ ] PostgreSQL database integration with SQLAlchemy
-- [ ] User authentication (register, login, logout)
-- [ ] Create, edit and delete posts
-- [ ] User profile pages with uploadable profile pictures
-- [ ] Dockerize the application
-- [ ] Deploy to cloud (AWS / GCP)
+```bash
+python populate_db.py
+```
 
----
+With `uv`:
 
-## 👤 Author
+```bash
+uv run python populate_db.py
+```
 
-**Mwangi Sam alias Kajeiy**
+Important: this script deletes existing data first. It also deletes generated files inside `media/profile_pics/`, except `.gitkeep` if present.
+
+The script:
+
+- creates users from the `USERS` list
+- logs each user in to get a JWT
+- uploads local images from `populate_images/` when a user has an `image` value
+- creates posts using authenticated API requests
+- updates post dates so pagination looks realistic
+
+Example seeded login credentials are in `populate_db.py`, such as:
+
+```text
+email: jubi@test.com
+password: TestPassword2!
+```
+
+Use the email address to log in. The OAuth2 form sends it as the `username` field internally, but the app treats it as email.
+
+## Profile Images
+
+Seed images live in:
+
+```text
+populate_images/
+```
+
+Uploaded/processed profile pictures are saved to:
+
+```text
+media/profile_pics/
+```
+
+The app processes uploaded files with Pillow:
+
+- transposes EXIF orientation
+- crops/fits to `300x300`
+- converts transparent/palette images to RGB
+- saves as optimized JPEG
+- stores only the generated filename in `users.image_file`
+
+The public URL is computed by the model:
+
+```text
+/media/profile_pics/<filename>
+```
+
+If a user has no image, the app uses:
+
+```text
+/static/profile_pics/profile.jpeg
+```
+
+## Authentication Flow
+
+Registration sends JSON to:
+
+```text
+POST /api/users
+```
+
+Login sends form data to:
+
+```text
+POST /api/users/token
+```
+
+On success, the frontend stores the JWT access token in:
+
+```text
+localStorage.access_token
+```
+
+Authenticated requests send:
+
+```http
+Authorization: Bearer <token>
+```
+
+Password hashing uses `pwdlib` with Argon2 through:
+
+```python
+PasswordHash.recommended()
+```
+
+## Password Reset Flow
+
+The browser page `/forgot-password` posts an email to:
+
+```text
+POST /api/users/forgot-password
+```
+
+If the user exists:
+
+1. Old reset tokens for that user are deleted.
+2. A random token is generated.
+3. Only the SHA-256 hash of the token is saved.
+4. An email is sent with a link like:
+
+```text
+http://localhost:8000/reset-password?token=<raw-token>
+```
+
+The reset page posts the token and new password to:
+
+```text
+POST /api/users/reset-password
+```
+
+The API hashes the submitted token, compares it with the database hash, checks expiration, updates the password, and deletes reset tokens for that user.
+
+### SMTP Configuration
+
+By default, the app uses:
+
+```env
+MAIL_SERVER=localhost
+MAIL_PORT=587
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_FROM=noreply@example.com
+MAIL_USE_TLS=true
+```
+
+If you do not have an SMTP server running locally, real reset emails will fail. For development, either configure a real provider or use a local testing SMTP tool.
+
+Example `.env` shape:
+
+```env
+MAIL_SERVER=smtp.example.com
+MAIL_PORT=587
+MAIL_USERNAME=your-username
+MAIL_PASSWORD=your-password
+MAIL_FROM=noreply@example.com
+MAIL_USE_TLS=true
+FRONTEND_URL=http://localhost:8000
+```
+
+## Frontend JavaScript
+
+Shared frontend helpers live in:
+
+```text
+static/js/utils.js
+static/js/auth.js
+```
+
+`auth.js` handles:
+
+- reading/writing the JWT token
+- fetching `/api/users/me`
+- caching the current user while a page is active
+- logout
+
+`utils.js` handles:
+
+- extracting API error messages
+- showing/hiding Bootstrap modals
+- escaping dynamic HTML
+- formatting dates for dynamically loaded posts
+
+The home page and user-posts page use fetch pagination. The initial page is rendered by Jinja, then later pages are fetched from the API and appended to the DOM.
+
+## Common Commands
+
+Run development server:
+
+```bash
+uvicorn main:app --reload
+```
+
+Run with `uv`:
+
+```bash
+uv run uvicorn main:app --reload
+```
+
+Seed database:
+
+```bash
+python populate_db.py
+```
+
+Check Python syntax:
+
+```bash
+python -m py_compile main.py models.py schemas.py auth.py routers/users.py routers/posts.py
+```
+
+Hit the posts API:
+
+```bash
+curl "http://127.0.0.1:8000/api/posts?skip=0&limit=10"
+```
+
+Open API docs:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+## Troubleshooting
+
+### `SECRET_KEY` error on startup
+
+`config.py` requires `SECRET_KEY`. Add it to `.env`:
+
+```env
+SECRET_KEY=change-this-to-a-long-random-secret
+```
+
+### Password reset request crashes or returns network error
+
+The forgot-password endpoint sends email in the background. If SMTP is not configured, the email send can fail.
+
+Check your `.env` mail settings or use a test SMTP tool during development.
+
+### Reset link says invalid or expired
+
+Possible causes:
+
+- token was already used
+- token expired
+- database was reseeded
+- old reset token hash was generated before a code fix
+
+Request a new reset link.
+
+### Profile pictures do not show
+
+Check that `main.py` mounts media:
+
+```python
+app.mount("/media", StaticFiles(directory="media"), name="media")
+```
+
+Then verify the file exists under:
+
+```text
+media/profile_pics/
+```
+
+### Browser still shows old JavaScript or old icon
+
+Browsers cache static files aggressively, especially favicons and JS modules.
+
+Try:
+
+```text
+Ctrl + Shift + R
+```
+
+Or open DevTools, right-click refresh, and choose "Empty Cache and Hard Reload".
+
+### `Load More Posts` does nothing
+
+Check the browser console and Network tab. The endpoint should return JSON like:
+
+```text
+GET /api/posts?skip=10&limit=10
+```
+
+If the JS import is cached, hard refresh the page.
+
+### Database schema looks stale
+
+This project currently uses `Base.metadata.create_all`, not migrations. During development, if the schema changes and SQLite still has the old table shape, reset with:
+
+```bash
+rm blog.db
+python populate_db.py
+```
+
+Only do this if you are okay losing local data.
+
+## Current Limitations
+
+- SQLite is used for local development.
+- No Alembic migrations yet.
+- Password reset requires SMTP configuration for real email delivery.
+- Tests are not set up yet.
+- Deployment/Docker setup is not included yet.
+
+## Roadmap Ideas
+
+- Add Alembic migrations.
+- Add automated tests for auth, posts, and password reset.
+- Add Docker and deployment configuration.
+- Add richer post editing UI.
+- Add comments or likes.
+- Add production email provider configuration.
+- Move from SQLite to PostgreSQL for deployment.
+
+## Author
+
+Mwangi Sam alias Kajeiy
+
 - GitHub: https://github.com/mwangisam203
 - LinkedIn: https://www.linkedin.com/in/samson-maina-26883116a/
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
