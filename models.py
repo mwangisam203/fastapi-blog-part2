@@ -48,3 +48,5 @@ class Post(Base):
     )
 
     author: Mapped[User] = relationship(back_populates="posts")
+
+
