@@ -35,7 +35,7 @@ def generate_reset_token() -> str:
 
 
 def hash_reset_token(token: str) -> str:
-    return hashlib.sha256(token.encode()).hexdigest
+    return hashlib.sha256(token.encode()).hexdigest()
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
