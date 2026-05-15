@@ -13,6 +13,9 @@ from database import get_db
 from typing import Annotated
 from fastapi import Depends, HTTPException, status
 
+import hashlib
+import secrets
+
 password_hash = PasswordHash.recommended()
 
 
